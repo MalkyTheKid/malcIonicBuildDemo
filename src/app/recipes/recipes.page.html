@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>recipes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let recipe of recipes" [routerLink]="['./', recipe.id]"> <!--ion item is an entry in the ion list. We can then loop it again and again using *ngFor
+                                                                                [routerLink] helps us navigate thru the site by adding in the path inside quotes('') and concatenating the recipe.id-->
+                                                            <!-- before, it was [routerLink]="['./', recipe.id] or '/recipes'-->                    
+      <ion-avatar> <!-- `let recipe of recipes` recipes array is declared on `recipes.page.ts` which follows the model of `recipe.model.ts`-->
+        <ion-img [src]="recipe.imageUrl"></ion-img>
+      </ion-avatar>
+      <ion-label> {{ recipe.title }}</ion-label> 
+    </ion-item> <!--explanation: `recipe` now has the data that's inside `recipes` on `recipes.page.ts` on line  -->
+  </ion-list> 
+</ion-content>
+
+<!-- now we want it so that the recipe image is increased WHEN WE CLICK ON IT.  -->

@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color = "primary">
+    <ion-buttons slot ="start"> <!-- makes sure that the following buttons appear at the top right -->
+      <ion-back-button defaultHref="/recipes"> <!-- Makes sure we go back to the recipes menu page -->
+      </ion-back-button>
+    </ion-buttons>
+    
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon name="apps-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons><!-- The main menu -->
+    
+    <ion-title>{{ loadedRecipe.title }}</ion-title>
+    
+    <ion-buttons slot="secondary">
+      <ion-button (click)="onDeleteRecipe()"> <!-- is defined on `recipe-detail.page.ts`, which makes use of the `deleteRecipe()` service on `recipes.service.ts`-->
+        <ion-icon name="trash" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons><!-- we add a delete recipe function. Slot "icon-only" means that only the icon will appear, no text -->
+  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> <!-- before we design the front end, make sure we have an object we can work with in the recipe-detail.page.ts -->
+  <ion-grid no-padding>
+    <ion-row>
+      <ion-col> <!-- The Image -->
+        <ion-img [src]= "loadedRecipe.imageUrl"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <h1><ion-label text-center class="ion-text-center">{{ loadedRecipe.title }} Ingredients</ion-label></h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col > <!-- the ingredients, we loop thru the array of the [ingredients] using *ngFor. `ig` is the variable that will hold the current item in the loop -->
+        <ion-list>
+          <ion-item *ngFor="let ig of loadedRecipe.ingredients" id='{{ loadedRecipe.id }}{{ ig }}'>{{ ig }}</ion-item>
+        </ion-list>
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+
+</ion-content>
+<!-- 
+  summary:
+    - Here we want the following:
+      - Image first
+      - then title
+      - then the recipe
+  *notes: ALWAYS, always add an `id` element to your *ngFor, for automation purposes.
+      - then we added a way back to navigate to our main menu via <ion-buttons> at header, and added a way to go back via <ion-back-button>
+      - we then add a delete recipe function
+
+-->
